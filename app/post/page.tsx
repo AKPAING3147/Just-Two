@@ -65,7 +65,22 @@ export default function CreatePostPage() {
 
 
     return (
-        <div className="min-h-screen p-4 md:p-8 font-mono flex items-center justify-center">
+        <div className="min-h-screen p-4 md:p-8 font-mono flex items-center justify-center relative">
+            {/* Full Screen Loading Stage */}
+            {isSubmitting && (
+                <div className="fixed inset-0 z-100 bg-[#fdf6e3] flex flex-col items-center justify-center p-8 text-center bg-opacity-95 backdrop-blur-sm">
+                    <div className="w-24 h-24 brutal-border bg-[#fabd2f] animate-bounce mb-8 flex items-center justify-center brutal-shadow">
+                        <span className="text-4xl">📝</span>
+                    </div>
+                    <h2 className="text-3xl font-black uppercase tracking-[0.2em] text-[#2b2b2b] mb-4">
+                        PUBLISHING_ENTRY...
+                    </h2>
+                    <p className="font-bold text-[#928374] animate-pulse">
+                        SAYING_HELLO_TO_THE_DATABASE
+                    </p>
+                </div>
+            )}
+
             <div className="w-full max-w-2xl">
                 <div className="mb-8 flex items-center justify-between">
                     <button
@@ -204,7 +219,7 @@ export default function CreatePostPage() {
                             disabled={isSubmitting || !title.trim() || !body.trim()}
                             className="flex-1 px-8 py-4 bg-[#2b2b2b] text-[#fdf6e3] brutal-border font-black uppercase tracking-widest hover:bg-[#fdf6e3] hover:text-[#2b2b2b] transition-all disabled:opacity-50 disabled:cursor-not-allowed brutal-shadow hover:brutal-shadow-hover active:brutal-shadow-active"
                         >
-                            {isSubmitting ? "PUBLISHING..." : "PUBLISH_NOW"}
+                            {isSubmitting ? "UPLOADING..." : "PUBLISH_NOW"}
                         </button>
                     </div>
                 </form>
