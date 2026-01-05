@@ -40,14 +40,24 @@ export default function EditPostPage() {
                 }
             );
 
-            if (!response.ok) throw new Error("Upload failed");
-
             const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error?.message || "Upload failed");
+            }
+
             setImageUrl(data.secure_url);
             toast.success("IMAGE_UPDATED");
         } catch (error) {
             console.error("Upload error:", error);
-            toast.error("UPLOAD_FAILED");
+            const errorMessage = error instanceof Error ? error.message : "UPLOAD_FAILED";
+            if (errorMessage.includes("upload_preset")) {
+                toast.error("CONFIG ERROR: Check Upload Preset");
+            } else if (errorMessage.includes("cloud_name")) {
+                toast.error("CONFIG ERROR: Check Cloud Name");
+            } else {
+                toast.error(`ERROR: ${errorMessage.toUpperCase()}`);
+            }
         } finally {
             setIsUploading(false);
         }
