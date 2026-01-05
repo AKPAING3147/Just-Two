@@ -168,30 +168,46 @@ export default function EditPostPage() {
                         <label className="block text-sm font-black uppercase mb-2">
                             UPLOAD_NEW_IMAGE (FROM_FILES)
                         </label>
-                        <div className="relative">
+                        <div className="relative group w-full h-64 bg-[#fdf6e3] brutal-border flex flex-col items-center justify-center cursor-pointer overflow-hidden hover:bg-[#fabd2f]/10 transition-colors">
+                            {imageUrl ? (
+                                <>
+                                    <img src={imageUrl} alt="Upload Preview" className="absolute inset-0 w-full h-full object-cover" />
+                                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                        <span className="bg-white px-4 py-2 font-bold uppercase text-xs brutal-border brutal-shadow">CHANGE_IMAGE</span>
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="text-center p-6">
+                                    <div className="text-4xl mb-4">📷</div>
+                                    <p className="font-bold uppercase text-sm mb-2 text-[#2b2b2b]">CLICK_TO_UPLOAD</p>
+                                    <p className="text-xs text-[#928374] uppercase">JPG, PNG, GIF</p>
+                                </div>
+                            )}
+
                             <input
                                 type="file"
                                 accept="image/*"
                                 onChange={handleImageUpload}
-                                className="w-full px-4 py-4 bg-[#fdf6e3] brutal-border font-bold focus:outline-none text-[#2b2b2b] cursor-pointer file:mr-4 file:py-2 file:px-4 file:brutal-border file:text-sm file:font-black file:bg-[#fabd2f] file:text-[#2b2b2b] hover:file:bg-[#fe8019]"
+                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                                 disabled={isSubmitting || isUploading}
                             />
+
                             {isUploading && (
-                                <p className="mt-2 text-xs font-bold animate-pulse text-[#fe8019]">UPLOADING_TO_CLOUD...</p>
+                                <div className="absolute inset-0 bg-white/80 flex flex-col items-center justify-center p-4">
+                                    <div className="w-8 h-8 border-4 border-[#2b2b2b] border-t-[#fb4934] rounded-full animate-spin mb-4"></div>
+                                    <p className="font-bold uppercase text-xs animate-pulse text-[#2b2b2b]">UPLOADING_TO_CLOUD...</p>
+                                </div>
                             )}
                         </div>
 
                         {imageUrl && (
-                            <div className="mt-4 brutal-border p-2 bg-white brutal-shadow">
-                                <img src={imageUrl} alt="Upload Preview" className="w-full h-auto max-h-60 object-cover" />
-                                <button
-                                    type="button"
-                                    onClick={() => setImageUrl("")}
-                                    className="mt-2 text-[10px] font-bold text-red-600 uppercase hover:underline"
-                                >
-                                    [ REMOVE_IMAGE ]
-                                </button>
-                            </div>
+                            <button
+                                type="button"
+                                onClick={() => setImageUrl("")}
+                                className="mt-2 text-[10px] font-bold text-red-600 uppercase hover:underline"
+                            >
+                                [ REMOVE_IMAGE ]
+                            </button>
                         )}
                     </div>
 
