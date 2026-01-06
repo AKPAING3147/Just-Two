@@ -69,7 +69,7 @@ export default function PostCard({ post, accentColor }: PostCardProps) {
 
                 {post.imageUrl && (
                     <div className="mb-6 brutal-border p-1 bg-white brutal-shadow-sm">
-                        <img src={post.imageUrl} alt="Post image" className="w-full h-48 object-cover" />
+                        <img src={post.imageUrl} alt="Post image" className="w-full h-[800px] object-cover" />
                     </div>
                 )}
                 {post.musicUrl && (

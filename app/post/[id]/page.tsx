@@ -70,7 +70,7 @@ export default async function PostDetailPage({
 
                     {post.imageUrl && (
                         <div className="mb-10 brutal-border p-2 bg-white brutal-shadow relative z-10">
-                            <img src={post.imageUrl} alt={post.title} className="w-full h-auto max-h-[500px] object-contain" />
+                            <img src={post.imageUrl} alt={post.title} className="w-full h-auto max-h-[800px] object-contain" />
                         </div>
                     )}
 
